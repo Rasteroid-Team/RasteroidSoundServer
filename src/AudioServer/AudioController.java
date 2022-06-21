@@ -8,6 +8,8 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class AudioController {
 
@@ -58,8 +60,21 @@ public class AudioController {
     }
 
     public static void main(String[] args){
-        AudioController audio = new AudioController("C:\\Users\\Alberturris\\Documents\\IntelliJProjects\\RasteroidSoundServer\\src\\AudioServer\\Resources\\theGrandFinale.wav");
-        audio.loadAudio();
-        audio.playSounds();
+        selectAudio(150);
+    }
+
+    public static void selectAudio(int numero){
+        switch (numero){
+            //Caso explosión:
+            case 150 -> {
+                String json = "explosion.wav";
+                Path path = Paths.get(json);
+                String ruta = String.valueOf(path.toAbsolutePath());
+                String rutaAbsoluta = ruta.replace(json,"src\\AudioServer\\Resources\\explosion.wav");
+                AudioController audio = new AudioController(rutaAbsoluta);
+                audio.loadAudio();
+                audio.playSounds();
+            }
+        }
     }
 }
