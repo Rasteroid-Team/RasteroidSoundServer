@@ -63,8 +63,8 @@ public class AudioController {
         selectAudio(150);
     }
 
-    public static void selectAudio(int numero){
-        switch (numero){
+    public static void selectAudio(int packet){
+        switch (packet){
             //Caso explosión:
             case 150 -> {
                 String json = "explosion.wav";
@@ -74,6 +74,16 @@ public class AudioController {
                 AudioController audio = new AudioController(rutaAbsoluta);
                 audio.loadAudio();
                 audio.playSounds();
+            }
+            //musica ambiente
+            case 120 -> {
+                String json = "melodia.wav";
+                Path path = Paths.get(json);
+                String ruta = String.valueOf(path.toAbsolutePath());
+                String rutaAbsoluta = ruta.replace(json,"src\\AudioServer\\Resources\\melodia.wav");
+                AudioController audio = new AudioController(rutaAbsoluta);
+                audio.loadAudio();
+                audio.playMusic();
             }
         }
     }
